@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Sperm Analyzer AI</string>
+    <string name="app_display_name">تحليل الحيوانات المنوية</string>
+    
+    <!-- Main App Description -->
+    <string name="app_description">AI-powered sperm analysis application</string>
+    <string name="app_description_ar">تطبيق تحليل الحيوانات المنوية بالذكاء الاصطناعي</string>
+    
+    <!-- Permissions -->
+    <string name="camera_permission">Camera permission is required to record videos</string>
+    <string name="camera_permission_ar">مطلوب إذن الكاميرا لتسجيل الفيديو</string>
+    
+    <string name="storage_permission">Storage permission is required to save analysis results</string>
+    <string name="storage_permission_ar">مطلوب إذن التخزين لحفظ نتائج التحليل</string>
+    
+    <string name="microphone_permission">Microphone permission is required for video recording</string>
+    <string name="microphone_permission_ar">مطلوب إذن الميكروفون لتسجيل الفيديو</string>
+    
+    <!-- Screen Titles -->
+    <string name="home_screen">Home</string>
+    <string name="home_screen_ar">الرئيسية</string>
+    
+    <string name="analysis_screen">Analysis</string>
+    <string name="analysis_screen_ar">التحليل</string>
+    
+    <string name="results_screen">Results</string>
+    <string name="results_screen_ar">النتائج</string>
+    
+    <string name="charts_screen">Charts</string>
+    <string name="charts_screen_ar">الرسوم البيانية</string>
+    
+    <string name="history_screen">History</string>
+    <string name="history_screen_ar">السجل</string>
+    
+    <string name="settings_screen">Settings</string>
+    <string name="settings_screen_ar">الإعدادات</string>
+    
+    <string name="camera_screen">Camera</string>
+    <string name="camera_screen_ar">الكاميرا</string>
+    
+    <string name="details_screen">Details</string>
+    <string name="details_screen_ar">التفاصيل</string>
+    
+    <!-- Common Actions -->
+    <string name="start_analysis">Start Analysis</string>
+    <string name="start_analysis_ar">بدء التحليل</string>
+    
+    <string name="upload_video">Upload Video</string>
+    <string name="upload_video_ar">رفع فيديو</string>
+    
+    <string name="record_video">Record Video</string>
+    <string name="record_video_ar">تسجيل فيديو</string>
+    
+    <string name="view_results">View Results</string>
+    <string name="view_results_ar">عرض النتائج</string>
+    
+    <string name="export_data">Export Data</string>
+    <string name="export_data_ar">تصدير البيانات</string>
+    
+    <string name="share_results">Share Results</string>
+    <string name="share_results_ar">مشاركة النتائج</string>
+    
+    <!-- Analysis Status -->
+    <string name="analysis_in_progress">Analysis in Progress...</string>
+    <string name="analysis_in_progress_ar">التحليل قيد التنفيذ...</string>
+    
+    <string name="analysis_complete">Analysis Complete</string>
+    <string name="analysis_complete_ar">اكتمل التحليل</string>
+    
+    <string name="analysis_failed">Analysis Failed</string>
+    <string name="analysis_failed_ar">فشل التحليل</string>
+    
+    <!-- Error Messages -->
+    <string name="error_camera_not_available">Camera not available</string>
+    <string name="error_camera_not_available_ar">الكاميرا غير متاحة</string>
+    
+    <string name="error_permission_denied">Permission denied</string>
+    <string name="error_permission_denied_ar">تم رفض الإذن</string>
+    
+    <string name="error_network_connection">Network connection error</string>
+    <string name="error_network_connection_ar">خطأ في الاتصال بالشبكة</string>
+    
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_file_not_found_ar">الملف غير موجود</string>
+    
+    <!-- Settings -->
+    <string name="language_settings">Language Settings</string>
+    <string name="language_settings_ar">إعدادات اللغة</string>
+    
+    <string name="server_settings">Server Settings</string>
+    <string name="server_settings_ar">إعدادات الخادم</string>
+    
+    <string name="theme_settings">Theme Settings</string>
+    <string name="theme_settings_ar">إعدادات المظهر</string>
+    
+    <!-- Analysis Parameters -->
+    <string name="sperm_count">Sperm Count</string>
+    <string name="sperm_count_ar">عدد الحيوانات المنوية</string>
+    
+    <string name="motility">Motility</string>
+    <string name="motility_ar">الحركة</string>
+    
+    <string name="morphology">Morphology</string>
+    <string name="morphology_ar">الشكل</string>
+    
+    <string name="concentration">Concentration</string>
+    <string name="concentration_ar">التركيز</string>
+    
+    <string name="velocity">Velocity</string>
+    <string name="velocity_ar">السرعة</string>
+    
+    <!-- Units -->
+    <string name="million_per_ml">Million/ml</string>
+    <string name="million_per_ml_ar">مليون/مل</string>
+    
+    <string name="percentage">Percentage</string>
+    <string name="percentage_ar">النسبة المئوية</string>
+    
+    <string name="micrometers_per_second">μm/s</string>
+    <string name="micrometers_per_second_ar">ميكرومتر/ثانية</string>
+    
+    <!-- Success Messages -->
+    <string name="video_uploaded_successfully">Video uploaded successfully</string>
+    <string name="video_uploaded_successfully_ar">تم رفع الفيديو بنجاح</string>
+    
+    <string name="data_exported_successfully">Data exported successfully</string>
+    <string name="data_exported_successfully_ar">تم تصدير البيانات بنجاح</string>
+    
+    <string name="settings_saved_successfully">Settings saved successfully</string>
+    <string name="settings_saved_successfully_ar">تم حفظ الإعدادات بنجاح</string>
+    
+    <!-- Loading States -->
+    <string name="loading">Loading...</string>
+    <string name="loading_ar">جاري التحميل...</string>
+    
+    <string name="processing">Processing...</string>
+    <string name="processing_ar">جاري المعالجة...</string>
+    
+    <string name="uploading">Uploading...</string>
+    <string name="uploading_ar">جاري الرفع...</string>
+    
+    <string name="downloading">Downloading...</string>
+    <string name="downloading_ar">جاري التنزيل...</string>
+    
+    <!-- Dialog Actions -->
+    <string name="ok">OK</string>
+    <string name="ok_ar">موافق</string>
+    
+    <string name="cancel">Cancel</string>
+    <string name="cancel_ar">إلغاء</string>
+    
+    <string name="retry">Retry</string>
+    <string name="retry_ar">إعادة المحاولة</string>
+    
+    <string name="delete">Delete</string>
+    <string name="delete_ar">حذف</string>
+    
+    <string name="save">Save</string>
+    <string name="save_ar">حفظ</string>
+    
+    <string name="edit">Edit</string>
+    <string name="edit_ar">تحرير</string>
+</resources>
