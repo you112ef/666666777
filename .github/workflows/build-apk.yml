@@ -1,0 +1,165 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '11'
+    
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Install dependencies
+      working-directory: frontend
+      run: |
+        npm ci
+        npm install -g @expo/cli
+        npm install -g eas-cli
+    
+    - name: Create Expo account and login
+      working-directory: frontend
+      run: |
+        # Create expo account programmatically (if needed)
+        # expo login --non-interactive
+        echo "Skipping Expo login for CI"
+    
+    - name: Build APK with Expo
+      working-directory: frontend
+      run: |
+        # Build APK using Expo
+        npx expo export --platform android
+        npx expo run:android --variant release
+      env:
+        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    
+    - name: Build APK Alternative (React Native CLI)
+      working-directory: frontend
+      run: |
+        # Alternative build method using React Native CLI
+        npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+        cd android
+        ./gradlew assembleRelease
+      continue-on-error: true
+    
+    - name: Sign APK
+      working-directory: frontend
+      run: |
+        # Sign APK (if keystore is available)
+        if [ -f "${{ secrets.ANDROID_KEYSTORE_FILE }}" ]; then
+          echo "Signing APK..."
+          # Add signing logic here
+        else
+          echo "No keystore found, using debug signing"
+        fi
+      continue-on-error: true
+    
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sperm-analyzer-ai-apk
+        path: |
+          frontend/android/app/build/outputs/apk/release/*.apk
+          frontend/android/app/build/outputs/apk/debug/*.apk
+        retention-days: 30
+    
+    - name: Create Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          frontend/android/app/build/outputs/apk/release/*.apk
+          frontend/android/app/build/outputs/apk/debug/*.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload to Google Play (Optional)
+      if: github.event_name == 'release'
+      working-directory: frontend
+      run: |
+        # Upload to Google Play Store (if configured)
+        echo "Google Play upload would go here"
+        # fastlane android deploy
+      continue-on-error: true
+    
+    - name: Notify Discord
+      if: always()
+      uses: sarisia/actions-status-discord@v1
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        title: "APK Build Status"
+        description: "Sperm Analyzer AI APK build completed"
+        color: ${{ job.status == 'success' && 0x00ff00 || 0xff0000 }}
+      continue-on-error: true
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    
+    - name: Install Frontend Dependencies
+      working-directory: frontend
+      run: npm ci
+    
+    - name: Install Backend Dependencies
+      working-directory: backend
+      run: |
+        pip install -r requirements.txt
+        pip install pytest pytest-asyncio
+    
+    - name: Run Frontend Tests
+      working-directory: frontend
+      run: |
+        npm test -- --coverage --watchAll=false
+        npm run lint
+    
+    - name: Run Backend Tests
+      working-directory: backend
+      run: |
+        pytest --cov=./ --cov-report=xml
+        flake8 .
+    
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./frontend/coverage/lcov.info,./backend/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
